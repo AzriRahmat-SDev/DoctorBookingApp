@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 )
 
@@ -74,6 +75,7 @@ func (bst *bst) insertNode(t **binaryNode, time string) error {
 	}
 	return nil
 }
+
 func (bst *bst) insert(time string) error {
 	bst.insertNode(&bst.root, time)
 	return nil
@@ -90,4 +92,35 @@ func (bst *bst) inOrderTraversal(t *binaryNode) error {
 
 func (bst *bst) inOrder() {
 	bst.inOrderTraversal(bst.root)
+}
+
+func (bst *bst) findSuccessor(t *binaryNode) string {
+	for t.right != nil {
+		t = t.right
+	}
+	return t.time
+}
+
+func (bst *bst) removeNode(t **binaryNode, time string) (*binaryNode, error) {
+	if *t == nil {
+		return nil, errors.New("Tree is empty")
+	} else if time < (*t).time {
+		(*t).left, _ = bst.removeNode(&(*t).left, time)
+	} else if time > (*t).time {
+		(*t).right, _ = bst.removeNode(&(*t).right, time)
+	} else {
+		if (*t).left == nil {
+			return (*t).right, nil
+		} else if (*t).right == nil {
+			return (*t).left, nil
+		} else {
+			(*t).time = bst.findSuccessor((*t).left)
+			(*t).left, _ = bst.removeNode(&(*t).left, time)
+		}
+	}
+	return *t, nil
+}
+
+func (bst *bst) remove(time string) {
+	bst.root, _ = bst.removeNode(&bst.root, time)
 }

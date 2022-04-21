@@ -20,7 +20,9 @@ func bookingMenu() {
 	if result == "dr.vickram" {
 		fmt.Println("These are the available slots")
 		drVickramSchedule.inOrder()
-		fmt.Scanln()
+		fmt.Println("Please enter the timing you want to book (I.e: Slot 1)")
+		fmt.Scanln(userInputRemove)
+		drVickramSchedule.remove(userInputRemove)
 	}
 
 	if result == "dr.fazuli" {

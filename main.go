@@ -11,6 +11,8 @@ var drIdrisSchedule = &bst{nil}
 var drSimSchedule = &bst{nil}
 var userInputMainMenu int
 var userInputBooking string
+var userInputRemove bst
+var searchScheduleArray [4]*bst
 
 func init() {
 	doctorLists.addDoctors("Dr.Vickram")
@@ -48,6 +50,11 @@ func init() {
 	drSimSchedule.insert("Slot 1")
 	drSimSchedule.insert("Slot 6")
 	drSimSchedule.insert("Slot 8")
+
+	searchScheduleArray[0] = drVickramSchedule
+	searchScheduleArray[1] = drFazuliSchedule
+	searchScheduleArray[2] = drIdrisSchedule
+	searchScheduleArray[3] = drSimSchedule
 }
 
 func main() {
