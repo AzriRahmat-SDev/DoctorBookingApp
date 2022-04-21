@@ -19,7 +19,6 @@ func init() {
 	doctorLists.addDoctors("Dr.Sim")
 
 	//Declaring Open schedule for the doctors
-
 	//Vickram
 	drVickramSchedule.insert("Slot 4")
 	drVickramSchedule.insert("Slot 3")
@@ -62,12 +61,3 @@ func main() {
 		fmt.Println()
 	}
 }
-
-/*
-okay i figured out the issue.
-the name you gave your variable cannot share the same name as the type you declared
-this no work ==> doctorsLinkedList := &doctorsLinkedList
-this works ==> doctorLists = &doctorsLinkedList{nil, 0}
-
-i think its because the compiler thinks youre trying to re-declaring the type to something else
-*/
