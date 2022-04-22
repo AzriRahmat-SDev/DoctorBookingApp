@@ -109,7 +109,7 @@ func (bst *BST) removeNode(t **binaryNode, time string) (*binaryNode, error) {
 	} else if time > (*t).time {
 		(*t).right, _ = bst.removeNode(&(*t).right, time)
 	} else {
-		if (*t).left == nil && (*t).right == nil {
+		if (*t).left == nil {
 			*t = nil
 			return *t, nil
 		} else if (*t).left == nil {
@@ -131,6 +131,7 @@ func (bst *BST) removeNode(t **binaryNode, time string) (*binaryNode, error) {
 	return *t, nil
 }
 
-func (bst *BST) remove(time string) {
+func (bst *BST) remove(time string) *binaryNode {
 	bst.root, _ = bst.removeNode(&bst.root, time)
+	return bst.root
 }

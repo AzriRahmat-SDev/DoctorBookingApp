@@ -13,7 +13,27 @@ var userInputMainMenu int
 var userInputFeatureMenu int
 var userInputBooking string
 var userInputRemove string
-var searchScheduleArray [4]*BST
+
+//Declaring Array for Timeslots
+var bookedSlotsList = [][9]*binaryNode{vickramBookedSlots, fazuliBookedSlots, idrisBookedSlots, simBookedSlots}
+
+// type bookedSlotsList struct {
+// 	name string
+// 	slot1 string
+// 	slot2 string
+// 	slot3 string
+// 	slot4 string
+// 	slot5 string
+// 	slot6 string
+// 	slot7 string
+// 	slot8 string
+// 	slot9 string
+// }
+
+var vickramBookedSlots = [9]*binaryNode{}
+var fazuliBookedSlots = [9]*binaryNode{}
+var idrisBookedSlots = [9]*binaryNode{}
+var simBookedSlots = [9]*binaryNode{}
 
 var userSelection string
 
@@ -25,11 +45,15 @@ func init() {
 
 	//Declaring Open schedule for the doctors
 	//Vickram
-	drVickramSchedule.insert("Slot 4")
-	drVickramSchedule.insert("Slot 3")
-	drVickramSchedule.insert("Slot 5")
-	drVickramSchedule.insert("Slot 8")
-	drVickramSchedule.insert("Slot 1")
+	drVickramSchedule.insert("Slot3")
+	drVickramSchedule.insert("Slot4")
+	drVickramSchedule.insert("Slot5")
+	drVickramSchedule.insert("Slot6")
+	drVickramSchedule.insert("Slot7")
+	drVickramSchedule.insert("Slot8")
+	drVickramSchedule.insert("Slot9")
+	drVickramSchedule.insert("Slot2")
+	drVickramSchedule.insert("Slot1")
 
 	//Fazuli
 	drFazuliSchedule.insert("Slot 4")
@@ -53,11 +77,6 @@ func init() {
 	drSimSchedule.insert("Slot 1")
 	drSimSchedule.insert("Slot 6")
 	drSimSchedule.insert("Slot 8")
-
-	searchScheduleArray[0] = drVickramSchedule
-	searchScheduleArray[1] = drFazuliSchedule
-	searchScheduleArray[2] = drIdrisSchedule
-	searchScheduleArray[3] = drSimSchedule
 }
 
 func main() {
@@ -76,5 +95,7 @@ func main() {
 	} else if userInputFeatureMenu == 2 {
 		doctorRollCall()
 		bookingAppointment()
+	} else if userInputFeatureMenu == 3 {
+		searchTimeSlots()
 	}
 }

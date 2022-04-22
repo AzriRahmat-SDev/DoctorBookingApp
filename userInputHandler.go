@@ -30,9 +30,24 @@ func userInputSelectDoctorName(question string) string {
 
 func doctorTimeSlots(question string) string {
 	fmt.Println(question)
-	userSelection = ""
 	drVickramSchedule.inOrder()
+	userSelection = ""
+	fmt.Println("\nPlease Enter A Slot You Wish To Book(Press q To Exit)")
 	fmt.Scanln(&userSelection)
-	fmt.Println(userSelection)
+	return userSelection
+}
+
+func doctorTimeScheduleHandler(question string) string {
+	fmt.Println(question)
+	doctorRollCall()
+	userSelection = ""
+	fmt.Scanln(&userSelection)
+	return userSelection
+}
+
+func selectTimeSlots(question string) string {
+	fmt.Println(question)
+	userSelection = ""
+	fmt.Scanln(&userSelection)
 	return userSelection
 }
