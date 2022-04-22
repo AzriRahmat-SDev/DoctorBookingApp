@@ -20,7 +20,7 @@ type binaryNode struct {
 	right *binaryNode
 }
 
-type bst struct {
+type BST struct {
 	root *binaryNode
 }
 
@@ -44,7 +44,7 @@ func (r *doctorsLinkedList) addDoctors(name string) error {
 
 func (r *doctorsLinkedList) printAllDoctorNodes() error {
 
-	fmt.Println("List of available Doctors: ")
+	fmt.Println("\nList of available Doctors: ")
 	if r.head == nil {
 		fmt.Println("There are no doctors in the list")
 		return nil
@@ -58,7 +58,7 @@ func (r *doctorsLinkedList) printAllDoctorNodes() error {
 	return nil
 }
 
-func (bst *bst) insertNode(t **binaryNode, time string) error {
+func (bst *BST) insertNode(t **binaryNode, time string) error {
 	if *t == nil {
 		newNode := &binaryNode{
 			time:  time,
@@ -76,12 +76,12 @@ func (bst *bst) insertNode(t **binaryNode, time string) error {
 	return nil
 }
 
-func (bst *bst) insert(time string) error {
+func (bst *BST) insert(time string) error {
 	bst.insertNode(&bst.root, time)
 	return nil
 }
 
-func (bst *bst) inOrderTraversal(t *binaryNode) error {
+func (bst *BST) inOrderTraversal(t *binaryNode) error {
 	if t != nil {
 		bst.inOrderTraversal(t.left)
 		fmt.Println(t.time)
@@ -90,18 +90,18 @@ func (bst *bst) inOrderTraversal(t *binaryNode) error {
 	return nil
 }
 
-func (bst *bst) inOrder() {
+func (bst *BST) inOrder() {
 	bst.inOrderTraversal(bst.root)
 }
 
-func (bst *bst) findSuccessor(t *binaryNode) string {
+func (bst *BST) findSuccessor(t *binaryNode) *binaryNode {
 	for t.right != nil {
 		t = t.right
 	}
-	return t.time
+	return t
 }
 
-func (bst *bst) removeNode(t **binaryNode, time string) (*binaryNode, error) {
+func (bst *BST) removeNode(t **binaryNode, time string) (*binaryNode, error) {
 	if *t == nil {
 		return nil, errors.New("Tree is empty")
 	} else if time < (*t).time {
@@ -109,18 +109,28 @@ func (bst *bst) removeNode(t **binaryNode, time string) (*binaryNode, error) {
 	} else if time > (*t).time {
 		(*t).right, _ = bst.removeNode(&(*t).right, time)
 	} else {
-		if (*t).left == nil {
-			return (*t).right, nil
+		if (*t).left == nil && (*t).right == nil {
+			*t = nil
+			return *t, nil
+		} else if (*t).left == nil {
+			temp := *t
+			*t = temp.right
+			temp = nil
+			return *t, nil
 		} else if (*t).right == nil {
-			return (*t).left, nil
+			temp := *t
+			*t = temp.left
+			temp = nil
+			return *t, nil
 		} else {
-			(*t).time = bst.findSuccessor((*t).left)
-			(*t).left, _ = bst.removeNode(&(*t).left, time)
+			temp := bst.findSuccessor((*t).right)
+			(*t) = temp
+			(*t).right, _ = bst.removeNode(&(*t).right, time)
 		}
 	}
 	return *t, nil
 }
 
-func (bst *bst) remove(time string) {
+func (bst *BST) remove(time string) {
 	bst.root, _ = bst.removeNode(&bst.root, time)
 }

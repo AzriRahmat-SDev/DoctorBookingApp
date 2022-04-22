@@ -5,14 +5,17 @@ import (
 )
 
 var doctorLists = &doctorsLinkedList{nil, 0}
-var drVickramSchedule = &bst{nil}
-var drFazuliSchedule = &bst{nil}
-var drIdrisSchedule = &bst{nil}
-var drSimSchedule = &bst{nil}
+var drVickramSchedule = &BST{nil}
+var drFazuliSchedule = &BST{nil}
+var drIdrisSchedule = &BST{nil}
+var drSimSchedule = &BST{nil}
 var userInputMainMenu int
+var userInputFeatureMenu int
 var userInputBooking string
-var userInputRemove bst
-var searchScheduleArray [4]*bst
+var userInputRemove string
+var searchScheduleArray [4]*BST
+
+var userSelection string
 
 func init() {
 	doctorLists.addDoctors("Dr.Vickram")
@@ -59,12 +62,19 @@ func init() {
 
 func main() {
 	fmt.Println("Welcome to Doctor Appointment Booking System.")
+	fmt.Println("=============================================")
 	showMainMenu()
-	fmt.Scanln(&userInputMainMenu)
+
 	if userInputMainMenu == 1 {
-		doctorLists.printAllDoctorNodes()
-		bookingMenu()
+		featureMenu()
 	} else if userInputMainMenu == 2 {
-		fmt.Println()
+		showMainMenu()
+	}
+
+	if userInputFeatureMenu == 1 {
+		doctorRollCall()
+	} else if userInputFeatureMenu == 2 {
+		doctorRollCall()
+		bookingAppointment()
 	}
 }
