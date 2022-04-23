@@ -42,17 +42,11 @@ func bookingAppointment() {
 		drIdrisSchedule.inOrder()
 		fmt.Scanln()
 	}
-
-	if doctorName == "dr.simanntan" {
-		drSimSchedule.inOrder()
-		fmt.Scanln()
-	}
 }
 
 //Option 2
 func removingTimeSlots() {
 	timeSlot := doctorTimeSlots("\nThese are available Timeslots")
-	fmt.Println("this is difficlt man!", timeSlot)
 	removedTimeSlot := drVickramSchedule.remove(timeSlot)
 
 	switch removedTimeSlot.time {
@@ -80,7 +74,7 @@ func removingTimeSlots() {
 	if timeSlot == "q" {
 		main()
 	}
-	removingTimeSlots()
+	main()
 }
 
 //Option 3
@@ -95,18 +89,10 @@ func searchTimeSlots() {
 				// fmt.Println("Work please")
 				continue
 			} else if selectedTimeByUser == vickramBookedSlots[i].time {
-				fmt.Println("Yes This Slot is available")
+				fmt.Println("Yes This Slot Is Available For The Selected Doctor")
 			} else {
-				fmt.Println("Sorry This Slot is not available")
+				fmt.Println("Sorry This Slot is not available For The Selected Doctor")
 			}
 		}
-
-		// for i := 0; i < len(vickramBookedSlots)-1; i++ {
-		// 	if selectedTimeByUser == vickramBookedSlots[i].time {
-		// 		fmt.Println("Yes This Slot is available")
-		// 	} else {
-		// 		fmt.Println("Sorry This Slot is not available")
-		// 	}
-		// }
 	}
 }

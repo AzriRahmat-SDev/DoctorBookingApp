@@ -8,32 +8,17 @@ var doctorLists = &doctorsLinkedList{nil, 0}
 var drVickramSchedule = &BST{nil}
 var drFazuliSchedule = &BST{nil}
 var drIdrisSchedule = &BST{nil}
-var drSimSchedule = &BST{nil}
 var userInputMainMenu int
 var userInputFeatureMenu int
 var userInputBooking string
 var userInputRemove string
 
 //Declaring Array for Timeslots
-var bookedSlotsList = [][9]*binaryNode{vickramBookedSlots, fazuliBookedSlots, idrisBookedSlots, simBookedSlots}
-
-// type bookedSlotsList struct {
-// 	name string
-// 	slot1 string
-// 	slot2 string
-// 	slot3 string
-// 	slot4 string
-// 	slot5 string
-// 	slot6 string
-// 	slot7 string
-// 	slot8 string
-// 	slot9 string
-// }
+var bookedSlotsList = [][9]*binaryNode{vickramBookedSlots, fazuliBookedSlots, idrisBookedSlots}
 
 var vickramBookedSlots = [9]*binaryNode{}
 var fazuliBookedSlots = [9]*binaryNode{}
 var idrisBookedSlots = [9]*binaryNode{}
-var simBookedSlots = [9]*binaryNode{}
 
 var userSelection string
 
@@ -45,38 +30,62 @@ func init() {
 
 	//Declaring Open schedule for the doctors
 	//Vickram
-	drVickramSchedule.insert("Slot3")
 	drVickramSchedule.insert("Slot4")
-	drVickramSchedule.insert("Slot5")
+	drVickramSchedule.insert("Slot3")
 	drVickramSchedule.insert("Slot6")
-	drVickramSchedule.insert("Slot7")
 	drVickramSchedule.insert("Slot8")
 	drVickramSchedule.insert("Slot9")
-	drVickramSchedule.insert("Slot2")
-	drVickramSchedule.insert("Slot1")
 
 	//Fazuli
-	drFazuliSchedule.insert("Slot 4")
-	drFazuliSchedule.insert("Slot 2")
-	drFazuliSchedule.insert("Slot 6")
-	drFazuliSchedule.insert("Slot 3")
-	drFazuliSchedule.insert("Slot 9")
-	drFazuliSchedule.insert("Slot 7")
-	drFazuliSchedule.insert("Slot 8")
+	drFazuliSchedule.insert("Slot4")
+	drFazuliSchedule.insert("Slot2")
+	drFazuliSchedule.insert("Slot6")
+	drFazuliSchedule.insert("Slot3")
+	drFazuliSchedule.insert("Slot9")
+	drFazuliSchedule.insert("Slot7")
+	drFazuliSchedule.insert("Slot8")
 
 	//Idris
-	drIdrisSchedule.insert("Slot 5")
-	drIdrisSchedule.insert("Slot 1")
-	drIdrisSchedule.insert("Slot 3")
-	drIdrisSchedule.insert("Slot 6")
-	drIdrisSchedule.insert("Slot 9")
-	drIdrisSchedule.insert("Slot 7")
+	drIdrisSchedule.insert("Slot5")
+	drIdrisSchedule.insert("Slot1")
+	drIdrisSchedule.insert("Slot3")
+	drIdrisSchedule.insert("Slot6")
+	drIdrisSchedule.insert("Slot9")
+	drIdrisSchedule.insert("Slot7")
 
-	//Sim
-	drSimSchedule.insert("Slot 3")
-	drSimSchedule.insert("Slot 1")
-	drSimSchedule.insert("Slot 6")
-	drSimSchedule.insert("Slot 8")
+	//Declaring closed schedule for Doctors
+	//vickram
+	drVickramSchedule.insert("Slot1")
+	drVickramSchedule.insert("Slot2")
+	drVickramSchedule.insert("Slot5")
+	drVickramSchedule.insert("Slot7")
+	initVTimeSlots1 := drVickramSchedule.remove("Slot1")
+	vickramBookedSlots[0] = initVTimeSlots1
+	initVTimeSlots2 := drVickramSchedule.remove("Slot2")
+	vickramBookedSlots[1] = initVTimeSlots2
+	initVTimeSlots4 := drVickramSchedule.remove("Slot3")
+	vickramBookedSlots[4] = initVTimeSlots4
+	initVTimeSlots7 := drVickramSchedule.remove("Slot1")
+	vickramBookedSlots[6] = initVTimeSlots7
+
+	//Fazuli
+	drFazuliSchedule.insert("Slot1")
+	drFazuliSchedule.insert("Slot5")
+	initFTimeSlots2 := drFazuliSchedule.remove("Slot2")
+	fazuliBookedSlots[1] = initFTimeSlots2
+	initFTimeSlots5 := drFazuliSchedule.remove("Slot5")
+	fazuliBookedSlots[4] = initFTimeSlots5
+
+	//Idris
+	drIdrisSchedule.insert("Slot2")
+	drIdrisSchedule.insert("Slot4")
+	drIdrisSchedule.insert("Slot8")
+	initITimeSlots2 := drIdrisSchedule.remove("Slot2")
+	fazuliBookedSlots[1] = initITimeSlots2
+	initITimeSlots4 := drIdrisSchedule.remove("Slot4")
+	fazuliBookedSlots[3] = initITimeSlots4
+	initITimeSlots8 := drIdrisSchedule.remove("Slot8")
+	fazuliBookedSlots[7] = initITimeSlots8
 }
 
 func main() {
