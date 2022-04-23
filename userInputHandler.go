@@ -28,9 +28,31 @@ func userInputSelectDoctorName(question string) string {
 	return resultLowerCase
 }
 
-func doctorTimeSlots(question string) string {
+func doctorTimeSlotsVickram(question string) string {
 	fmt.Println(question)
 	drVickramSchedule.inOrder()
+	userSelection = ""
+	fmt.Println("\nPlease Enter A Slot You Wish To Book(Press q To Exit)")
+	fmt.Scanln(&userSelection)
+	removingAllSpaces := strings.ReplaceAll(userSelection, " ", "")
+	resultLowerCase := strings.ToLower(removingAllSpaces)
+	return resultLowerCase
+}
+
+func doctorTimeSlotsFazuli(question string) string {
+	fmt.Println(question)
+	drFazuliSchedule.inOrder()
+	userSelection = ""
+	fmt.Println("\nPlease Enter A Slot You Wish To Book(Press q To Exit)")
+	fmt.Scanln(&userSelection)
+	removingAllSpaces := strings.ReplaceAll(userSelection, " ", "")
+	resultLowerCase := strings.ToLower(removingAllSpaces)
+	return resultLowerCase
+}
+
+func doctorTimeSlotsIdris(question string) string {
+	fmt.Println(question)
+	drIdrisSchedule.inOrder()
 	userSelection = ""
 	fmt.Println("\nPlease Enter A Slot You Wish To Book(Press q To Exit)")
 	fmt.Scanln(&userSelection)
@@ -51,7 +73,9 @@ func selectTimeSlots(question string) string {
 	fmt.Println(question)
 	userSelection = ""
 	fmt.Scanln(&userSelection)
-	return userSelection
+	removingAllSpaces := strings.ReplaceAll(userSelection, " ", "")
+	resultLowerCase := strings.ToLower(removingAllSpaces)
+	return resultLowerCase
 }
 
 func editDoctorScheduleHandler(question string) string {

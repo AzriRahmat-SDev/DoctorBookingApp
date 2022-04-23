@@ -24,7 +24,6 @@ func init() {
 	doctorLists.addDoctors("Dr.Vickram")
 	doctorLists.addDoctors("Dr.Fazuli")
 	doctorLists.addDoctors("Dr.Idris")
-	doctorLists.addDoctors("Dr.Sim")
 
 	//Declaring Open schedule for the doctors
 	//Vickram
@@ -93,8 +92,6 @@ func main() {
 
 	if userInputMainMenu == 1 {
 		featureMenu()
-	} else if userInputMainMenu == 2 {
-		showMainMenu()
 	} else {
 		fmt.Println("Invalid Option")
 		main()

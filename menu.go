@@ -7,7 +7,6 @@ import (
 
 func showMainMenu() {
 	fmt.Println("\n1. Appointment Booking")
-	fmt.Println("2. Admin Access")
 	fmt.Scanln(&userInputMainMenu)
 }
 
@@ -24,7 +23,7 @@ func featureMenu() {
 }
 
 //Option 1
-func doctorRollCall() { //should be change to current booking that you have
+func doctorRollCall() {
 	doctorLists.printAllDoctorNodes()
 }
 
@@ -45,7 +44,7 @@ func bookingAppointment() {
 
 //Option 2
 func removingTimeSlotsVickram() {
-	timeSlot := doctorTimeSlots("\nThese are available Timeslots")
+	timeSlot := doctorTimeSlotsVickram("\nThese are available Timeslots")
 	removedTimeSlot := drVickramSchedule.remove(timeSlot)
 
 	switch removedTimeSlot.time {
@@ -67,16 +66,15 @@ func removingTimeSlotsVickram() {
 		vickramBookedSlots[7] = removedTimeSlot
 	case "slot9":
 		vickramBookedSlots[8] = removedTimeSlot
-	case "q":
+	}
+	if timeSlot == "q" {
 		main()
-	default:
-		panic(errors.New("Invalid time slot"))
 	}
 	main()
 }
 
 func removingTimeSlotsFazuli() {
-	timeSlot := doctorTimeSlots("\nThese are available Timeslots")
+	timeSlot := doctorTimeSlotsFazuli("\nThese are available Timeslots")
 	removedTimeSlot := drFazuliSchedule.remove(timeSlot)
 
 	switch removedTimeSlot.time {
@@ -98,16 +96,15 @@ func removingTimeSlotsFazuli() {
 		fazuliBookedSlots[7] = removedTimeSlot
 	case "slot9":
 		fazuliBookedSlots[8] = removedTimeSlot
-	case "q":
+	}
+	if timeSlot == "q" {
 		main()
-	default:
-		panic(errors.New("Invalid time slot"))
 	}
 	main()
 }
 
 func removingTimeSlotsIdris() {
-	timeSlot := doctorTimeSlots("\nThese are available Timeslots")
+	timeSlot := doctorTimeSlotsIdris("\nThese are available Timeslots")
 	removedTimeSlot := drIdrisSchedule.remove(timeSlot)
 
 	switch removedTimeSlot.time {
@@ -129,10 +126,9 @@ func removingTimeSlotsIdris() {
 		idrisBookedSlots[7] = removedTimeSlot
 	case "slot9":
 		idrisBookedSlots[8] = removedTimeSlot
-	case "q":
+	}
+	if timeSlot == "q" {
 		main()
-	default:
-		panic(errors.New("Invalid time slot"))
 	}
 	main()
 }
@@ -188,6 +184,7 @@ func searchTimeSlots() {
 
 //Option 4
 func editAppointment() {
+	var response string = ""
 	editDoctorSchedule := editDoctorScheduleHandler("\nPlease Select The Available Doctors")
 	if editDoctorSchedule == "dr.vickram" {
 		editTimeByUser := selectTimeSlots("\nPlease Select A Time (Slot1-Slot9)")
@@ -200,9 +197,58 @@ func editAppointment() {
 				return
 			} else {
 				fmt.Println("\nSorry This Slot Has Not Been Booked")
+				fmt.Println("\nDo You Wish to Book This Slot Now? (Yes/No)")
+				fmt.Scanln(&response)
+				if response == "Yes" {
+					drVickramSchedule.insert(editTimeByUser)
+				} else if response == "No" {
+					return
+				}
 				return
 			}
 		}
-		drVickramSchedule.insert(editTimeByUser)
+	} else if editDoctorSchedule == "dr.fazuli" {
+		editTimeByUser := selectTimeSlots("\nPlease Select A Time (Slot1-Slot9)")
+		for i := range fazuliBookedSlots {
+			if fazuliBookedSlots[i].time == "" {
+				continue
+			} else if editTimeByUser == fazuliBookedSlots[i].time {
+				fazuliBookedSlots[i] = nil
+				fmt.Println("\nThis Slot Is Open To The Public Now")
+				return
+			} else {
+				fmt.Println("\nSorry This Slot Has Not Been Booked")
+				fmt.Println("\nDo You Wish to Book This Slot Now? (Yes/No)")
+				fmt.Scanln(&response)
+				if response == "Yes" {
+					drFazuliSchedule.insert(editTimeByUser)
+				} else if response == "No" {
+					return
+				}
+				return
+			}
+		}
+
+	} else if editDoctorSchedule == "dr.idris" {
+		editTimeByUser := selectTimeSlots("\nPlease Select A Time (Slot1-Slot9)")
+		for i := range idrisBookedSlots {
+			if idrisBookedSlots[i].time == "" {
+				continue
+			} else if editTimeByUser == idrisBookedSlots[i].time {
+				idrisBookedSlots[i] = nil
+				fmt.Println("\nThis Slot Is Open To The Public Now")
+				return
+			} else {
+				fmt.Println("\nSorry This Slot Has Not Been Booked")
+				fmt.Println("\nDo You Wish to Book This Slot Now? (Yes/No)")
+				fmt.Scanln(&response)
+				if response == "Yes" {
+					drIdrisSchedule.insert(editTimeByUser)
+				} else if response == "No" {
+					return
+				}
+				return
+			}
+		}
 	}
 }
