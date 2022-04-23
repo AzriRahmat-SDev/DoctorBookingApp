@@ -110,22 +110,13 @@ func (bst *BST) removeNode(t **binaryNode, time string) (*binaryNode, error) {
 		(*t).right, _ = bst.removeNode(&(*t).right, time)
 	} else {
 		if (*t).left == nil {
-			*t = nil
-			return *t, nil
-		} else if (*t).left == nil {
-			temp := *t
-			*t = temp.right
-			temp = nil
-			return *t, nil
+			return (*t).right, nil
 		} else if (*t).right == nil {
-			temp := *t
-			*t = temp.left
-			temp = nil
-			return *t, nil
+			return (*t).left, nil
 		} else {
-			temp := bst.findSuccessor((*t).right)
+			temp := bst.findSuccessor((*t).left)
 			(*t) = temp
-			(*t).right, _ = bst.removeNode(&(*t).right, time)
+			(*t).right, _ = bst.removeNode(&(*t).left, time)
 		}
 	}
 	return *t, nil

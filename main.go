@@ -14,8 +14,6 @@ var userInputBooking string
 var userInputRemove string
 
 //Declaring Array for Timeslots
-var bookedSlotsList = [][9]*binaryNode{vickramBookedSlots, fazuliBookedSlots, idrisBookedSlots}
-
 var vickramBookedSlots = [9]*binaryNode{}
 var fazuliBookedSlots = [9]*binaryNode{}
 var idrisBookedSlots = [9]*binaryNode{}
@@ -30,11 +28,11 @@ func init() {
 
 	//Declaring Open schedule for the doctors
 	//Vickram
-	drVickramSchedule.insert("Slot4")
 	drVickramSchedule.insert("Slot3")
 	drVickramSchedule.insert("Slot6")
 	drVickramSchedule.insert("Slot8")
 	drVickramSchedule.insert("Slot9")
+	drVickramSchedule.insert("Slot4")
 
 	//Fazuli
 	drFazuliSchedule.insert("Slot4")
@@ -63,9 +61,9 @@ func init() {
 	vickramBookedSlots[0] = initVTimeSlots1
 	initVTimeSlots2 := drVickramSchedule.remove("Slot2")
 	vickramBookedSlots[1] = initVTimeSlots2
-	initVTimeSlots4 := drVickramSchedule.remove("Slot3")
+	initVTimeSlots4 := drVickramSchedule.remove("Slot5")
 	vickramBookedSlots[4] = initVTimeSlots4
-	initVTimeSlots7 := drVickramSchedule.remove("Slot1")
+	initVTimeSlots7 := drVickramSchedule.remove("Slot7")
 	vickramBookedSlots[6] = initVTimeSlots7
 
 	//Fazuli
@@ -89,7 +87,7 @@ func init() {
 }
 
 func main() {
-	fmt.Println("Welcome to Doctor Appointment Booking System.")
+	fmt.Println("\nWelcome to Doctor Appointment Booking System.")
 	fmt.Println("=============================================")
 	showMainMenu()
 
@@ -97,14 +95,25 @@ func main() {
 		featureMenu()
 	} else if userInputMainMenu == 2 {
 		showMainMenu()
+	} else {
+		fmt.Println("Invalid Option")
+		main()
 	}
 
+	//Feature Menu
 	if userInputFeatureMenu == 1 {
 		doctorRollCall()
 	} else if userInputFeatureMenu == 2 {
 		doctorRollCall()
 		bookingAppointment()
+		main()
 	} else if userInputFeatureMenu == 3 {
 		searchTimeSlots()
+		main()
+	} else if userInputFeatureMenu == 4 {
+		editAppointment()
+		main()
+	} else if userInputFeatureMenu == 5 {
+		main()
 	}
 }

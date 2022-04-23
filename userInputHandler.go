@@ -34,7 +34,9 @@ func doctorTimeSlots(question string) string {
 	userSelection = ""
 	fmt.Println("\nPlease Enter A Slot You Wish To Book(Press q To Exit)")
 	fmt.Scanln(&userSelection)
-	return userSelection
+	removingAllSpaces := strings.ReplaceAll(userSelection, " ", "")
+	resultLowerCase := strings.ToLower(removingAllSpaces)
+	return resultLowerCase
 }
 
 func doctorTimeScheduleHandler(question string) string {
@@ -46,6 +48,13 @@ func doctorTimeScheduleHandler(question string) string {
 }
 
 func selectTimeSlots(question string) string {
+	fmt.Println(question)
+	userSelection = ""
+	fmt.Scanln(&userSelection)
+	return userSelection
+}
+
+func editDoctorScheduleHandler(question string) string {
 	fmt.Println(question)
 	userSelection = ""
 	fmt.Scanln(&userSelection)
